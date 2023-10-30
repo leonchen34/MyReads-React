@@ -9,9 +9,9 @@ const ShowShelfs = ({currentList,wantList,readList,changeShelf}) => {
             </div>
             <div className="list-books-content">
                 <div>
-                    <Shelf name="Currently Reading" list={currentList} changeShelf={changeShelf}/>
-                    <Shelf name="Want to Read" list={wantList} changeShelf={changeShelf}/>
-                    <Shelf name="Read" list={readList} changeShelf={changeShelf}/>
+                    <Shelf name="currentlyReading" list={currentList} changeShelf={changeShelf}/>
+                    <Shelf name="wantToRead" list={wantList} changeShelf={changeShelf}/>
+                    <Shelf name="read" list={readList} changeShelf={changeShelf}/>
                 </div>
             </div>
             <div className="open-search"> 

@@ -2,10 +2,16 @@ import {useState} from "react";
 
 import ShelfChanger from "./ShelfChanger";
 
-const Book = ({book,shelfName,changeShelf}) => {
+const Book = ({book,changeShelf}) => {
+    let shelfName="";
+    if (book.shelf)
+        shelfName=book.shelf;
+    else
+        shelfName="none";
     const [curShelf,setCurShelf] = useState(shelfName);
     const selectShelf = (newShelf) => {
         if (curShelf !== newShelf) {
+            book.shelf = newShelf;
             changeShelf(book,curShelf,newShelf);
             setCurShelf(newShelf);
         }

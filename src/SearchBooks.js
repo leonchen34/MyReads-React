@@ -13,8 +13,7 @@ const SearchBooks = ({changeShelf}) => {
         //console.log("qry is:",qry);
         //getBooks(qry);      
         const resp = await BookAPI.search(qry,num);
-        //const resp = await BookAPI.getAll();
-        //onsole.log(resp);
+        //console.log(resp);
         if (resp && !resp.error)
             setMatchList(resp);
         else 

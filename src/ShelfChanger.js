@@ -1,33 +1,28 @@
-import {useNavigate} from "react-router-dom";
+//import {useNavigate} from "react-router-dom";
 
 const ShelfChanger = ({book,shelfName,selectShelf}) => {
-    let navigate = useNavigate();
+    //console.log(shelfName);
+    //let navigate = useNavigate();
     let bookTitle=book.title;
-    let shelfValue="";
-    if (shelfName === "Currently Reading")
-        shelfValue="currentlyReading";
-    else if (shelfName === "Want to Read")
-        shelfValue="wantToRead";
-    else if (shelfName === "Read")
-        shelfValue="read";
-    else if (shelfName === "Matched List")
-        shelfValue="none";
-    //console.log(shelfValue);
 
     const handleSelect = () => {
         let ele = document.getElementById(bookTitle);
-        let newShelf = ele.options[ele.selectedIndex].text;
+        //let newShelf = ele.options[ele.selectedIndex].text;
+        let newShelf = ele.value;
+        //console.log("new shelf",newShelf);
         selectShelf(newShelf);
-        if (newShelf === "Currently Reading" ||
-            newShelf === "Want to Read" ||
-            newShelf === "Read") {            
+        /*
+        if (newShelf === "currentlyReading" ||
+            newShelf === "wantToRead" ||
+            newShelf === "read") {            
                 //navigate("/");
             }
+            */
     }
 
     return (
         <div className="book-shelf-changer">
-            <select id={bookTitle} defaultValue={shelfValue} onChange={handleSelect}>
+            <select id={bookTitle} defaultValue={shelfName} onChange={handleSelect}>
                 <option value="move" disabled>
                     Move to...
                 </option>
