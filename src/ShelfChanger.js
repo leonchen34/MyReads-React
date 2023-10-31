@@ -1,12 +1,13 @@
+import PropTypes from "prop-types";
 //import {useNavigate} from "react-router-dom";
 
 const ShelfChanger = ({book,shelfName,selectShelf}) => {
     //console.log(shelfName);
     //let navigate = useNavigate();
-    let bookTitle=book.title;
+    let bookId=book.id;
 
     const handleSelect = () => {
-        let ele = document.getElementById(bookTitle);
+        let ele = document.getElementById(bookId);
         //let newShelf = ele.options[ele.selectedIndex].text;
         let newShelf = ele.value;
         //console.log("new shelf",newShelf);
@@ -22,7 +23,7 @@ const ShelfChanger = ({book,shelfName,selectShelf}) => {
 
     return (
         <div className="book-shelf-changer">
-            <select id={bookTitle} defaultValue={shelfName} onChange={handleSelect}>
+            <select id={bookId} defaultValue={shelfName} onChange={handleSelect}>
                 <option value="move" disabled>
                     Move to...
                 </option>
@@ -35,6 +36,12 @@ const ShelfChanger = ({book,shelfName,selectShelf}) => {
             </select>
         </div>
     )
+}
+
+ShelfChanger.propTypes = {
+    book:PropTypes.object.isRequired,
+    shelfName:PropTypes.string.isRequired,
+    selectShelf:PropTypes.func.isRequired,
 }
 
 export default ShelfChanger;

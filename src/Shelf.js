@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Book from "./Book";
 
 const Shelf = ({name,list,changeShelf}) => {
@@ -8,7 +9,7 @@ const Shelf = ({name,list,changeShelf}) => {
             <div className="bookshelf-books">
                 <ol className="books-grid">
                     {list.map((book) => 
-                        <li key={book.title}>
+                        <li key={book.id}>
                             <Book book={book} changeShelf={changeShelf}/>
                         </li>
                     )}
@@ -16,6 +17,12 @@ const Shelf = ({name,list,changeShelf}) => {
             </div>
         </div>
     )
+}
+
+Shelf.propTypes = {
+    name:PropTypes.string.isRequired,
+    list:PropTypes.array.isRequired,
+    changeShelf:PropTypes.func.isRequired,
 }
 
 export default Shelf;

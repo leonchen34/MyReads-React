@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
 import Shelf from "./Shelf";
 
@@ -19,6 +20,12 @@ const ShowShelfs = ({currentList,wantList,readList,changeShelf}) => {
             </div>
         </div>
   )
+}
+
+ShowShelfs.propTypes = {
+    currentList:PropTypes.array.isRequired,
+    wantList:PropTypes.array.isRequired,
+    readList:PropTypes.array.isRequired,
 }
 
 export default ShowShelfs;

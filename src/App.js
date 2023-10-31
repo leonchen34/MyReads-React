@@ -1,9 +1,11 @@
 import "./App.css";
 import { useState, useEffect } from "react";
-import {Routes,Route,useNavigate} from "react-router-dom";
+import {Routes,Route} from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import ShowShelfs from "./ShowShelfs";
 import SearchBooks from "./SearchBooks";
+import BookDetails from "./BookDetails";
+import InvalidRoute from "./InvalidRoute";
 
 function App() {
   const [currentList,setCurrentList] = useState([]);
@@ -22,6 +24,8 @@ function App() {
             wList.push(book);
           else if (book.shelf === "read")
             rList.push(book);
+
+          return book;
         })
       }
       setCurrentList(cList);
@@ -31,25 +35,13 @@ function App() {
     initialStart();
   },[]);
 
-  const isInList = (list,book) => {
-    for (let e of list) {
-      if (e.id === book.id)
-        return true;
-    }
-
-    return false;
-  }
-
   const addBookToShelf = (book,shelf) => {
     //console.log(shelf);
     if (shelf === "currentlyReading") {
-      if (!isInList(currentList,book))
         setCurrentList(currentList.concat([book]));
     } else if (shelf === "wantToRead") {
-      if (!isInList(wantList,book))
         setWantList(wantList.concat([book]));
     } else if (shelf === "read") {
-      if (!isInList(readList,book))
         setReadList(readList.concat([book]));
     }
     BooksAPI.update(book,shelf);
@@ -79,10 +71,14 @@ function App() {
     <Routes>
       <Route exact path = "/"
           element={<ShowShelfs currentList={currentList} wantList={wantList} 
-              readList={readList} changeShelf={changeShelf}/> }/>
+              readList={readList} changeShelf={changeShelf} />} />
       <Route exact path = "/search"
-          element={<SearchBooks changeShelf={changeShelf} />}
-      />
+          element={<SearchBooks currentList={currentList} wantList={wantList}
+              readList={readList} changeShelf={changeShelf} />} />
+      <Route exact path ="/book/:id"
+          element={<BookDetails />} />
+      <Route path = "/*"
+          element={<InvalidRoute />} />
     </Routes>
   );
 }

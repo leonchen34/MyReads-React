@@ -1,6 +1,9 @@
+import PropTypes from "prop-types";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 import ShelfChanger from "./ShelfChanger";
+import BookDetails from "./BookDetails";
 
 const Book = ({book,changeShelf}) => {
     let shelfName="";
@@ -24,23 +27,31 @@ const Book = ({book,changeShelf}) => {
     let image = "";
     if (book.imageLinks && book.imageLinks.smallThumbnail)
         image = book.imageLinks.smallThumbnail;
+    //console.log(book);
     return (
         <div className="book">
             <div className="book-top">
-                <div
-                    className="book-cover"
-                    style={{
-                        width: 128,
-                        height: 193,
-                        backgroundImage:`url(${image})`,
-                    }}
-                ></div>             
+                <Link to={`/book/${book.id}`} state={{book}}>
+                    <div
+                        className="book-cover"
+                        style={{
+                            width: 128,
+                            height: 193,
+                            backgroundImage:`url(${image})`,
+                        }}
+                    ></div>  
+              </Link>           
             <ShelfChanger book={book} shelfName={curShelf} selectShelf={selectShelf}/>
             </div>
             <div className="book-title">{book.title}</div>
             <div className="book-authors">{authorStr}</div>           
         </div>
     )
+}
+
+Book.propTypes = {
+    book:PropTypes.object.isRequired,
+    changeShelf:PropTypes.func.isRequired,
 }
 
 export default Book;
