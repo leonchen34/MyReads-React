@@ -3,7 +3,6 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 
 import ShelfChanger from "./ShelfChanger";
-import BookDetails from "./BookDetails";
 
 const Book = ({book,changeShelf}) => {
     let shelfName="";
